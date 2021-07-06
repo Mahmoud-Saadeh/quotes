@@ -38,3 +38,8 @@ there are a json data that have an array of quotes, and it is required to read i
     - FileToStringAndParsTest: test if the data are being converted correctly
     - searchByAuthorTest: test if the search by author is working
 > [Json file](src/test/resources/test.json)
+
+
+## Libraries
+
+1. [Gson](https://github.com/google/gson)
