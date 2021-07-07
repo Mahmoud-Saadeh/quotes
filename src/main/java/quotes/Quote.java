@@ -13,9 +13,9 @@ public class Quote {
         return author;
     }
 
-    public String getText() {
-        return text;
-    }
+//    public String getText() {
+//        return text;
+//    }
 
     @Override
     public String toString() {
