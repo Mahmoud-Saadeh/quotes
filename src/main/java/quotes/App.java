@@ -24,15 +24,18 @@ public class App {
             }
             return;
         }
-
+//
         ParseString parser = new ParseString();
-        parser.convertString("src/main/resources/recentquotes.json");
+//        parser.convertString("src/main/resources/recentquotes.json");
+        parser.httpGetQuote();
 //        for (Quote q : test.getParsedData()) {
 //            System.out.println(q.toString());
 //        }
-        int random = randomQuote(parser.getParsedData().length);
+//        int random = randomQuote(parser.getParsedData().length);
+//
+//        System.out.println("AT INDEX "+random + " " +parser.getParsedData()[random]);
 
-        System.out.println("AT INDEX "+random + " " +parser.getParsedData()[random]);
+
     }
 
     public static int randomQuote(int length){

@@ -6,6 +6,7 @@ package quotes;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -15,8 +16,8 @@ public class AppTest {
         ParseString parser = new ParseString();
         parser.convertString("src/test/resources/test.json");
 
-        assertEquals("FileToStringAndParsTest should return S.A. McAuley","S.A. McAuley",parser.getParsedData()[0].getAuthor());
-        assertEquals("FileToStringAndParsTest should return George Orwell","George Orwell",parser.getParsedData()[1].getAuthor());
+        assertEquals("FileToStringAndParsTest should return S.A. McAuley","S.A. McAuley", parser.getParsedData().get(0).getAuthor());
+        assertEquals("FileToStringAndParsTest should return George Orwell","George Orwell", parser.getParsedData().get(1).getAuthor());
     }
 
     @Test public void searchByAuthorTest() throws IOException {
@@ -29,5 +30,31 @@ public class AppTest {
 
         parser.searchByAuthor("George Orwell");
         assertEquals("FileToStringAndParsTest should return George Orwell","George Orwell",parser.getQuote().getAuthor());
+    }
+
+    @Test
+    public void getQuoteReqTest() throws IOException {
+
+        assertNotNull("getQuoteReqTest shouldn't be Null",QuoteReq.getQuoteReq());
+    }
+
+    @Test
+    public void EditTest() throws IOException {
+        ArrayList<Quote> quotes = new ArrayList<>();
+        quotes.add(new Quote("Mahmoud","this is quote one"));
+        quotes.add(new Quote("Malek","this is quote two"));
+
+        String data = "{\"quoteAuthor\": \"Christopher Reeve\",\"quoteText\": \"Once you choose hope, anythings possible. \"}";
+
+        Edit.writeFile(quotes,data,"src/test/resources/testEdit.json");
+
+        String newDataEx = "[{\"author\":\"Mahmoud\",\"text\":\"this is quote one\"},{\"author\":\"Malek\",\"text\":\"this is quote two\"},{\"author\":\"Christopher Reeve\",\"text\":\"Once you choose hope, anythings possible. \"}]";
+
+        FileToString fileReader = new FileToString();
+
+        fileReader.readFile("src/test/resources/testEdit.json");
+
+        assertEquals("EditTest should add the new object to the json file.",newDataEx,fileReader.getStringFile());
+
     }
 }
